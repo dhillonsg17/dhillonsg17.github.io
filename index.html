@@ -3,8 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Gurvir Dhillon, software engineer in San Francisco. Backend, infrastructure and product.">
+<meta name="description" content="Gurvir Dhillon, software engineer in San Francisco. Backend, infrastructure and the product on top.">
 <meta name="theme-color" content="#0e1013">
+<link rel="canonical" href="https://dhillonsg17.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e1013'/%3E%3Cpath d='M12 46 L28 18 H52 L36 46 Z' fill='%23ff6a1a'/%3E%3Cpath d='M40 46 L48 32 H56 L48 46 Z' fill='%23f2f3f5'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dhillonsg17.github.io/">
+<meta property="og:title" content="Gurvir Dhillon · Software Engineer">
+<meta property="og:description" content="Software engineer in San Francisco. Take a 30-second hot lap from an F1 cockpit, then see where I've raced.">
+<meta name="twitter:card" content="summary">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
 :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
@@ -65,7 +72,11 @@ a { color: inherit; }
 .live::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--red); margin-right: 6px; vertical-align: 1px; animation: pulse 1.4s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .2; } }
 
-.intro { display: flex; flex-direction: column; gap: 16px; }
+.intro { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: end; gap: 24px 48px; }
+.name { display: flex; flex-direction: column; gap: 18px; }
+.aside { display: flex; flex-direction: column; gap: 14px; padding-bottom: 4px; }
+.status { margin: 0; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.ndot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-right: 8px; vertical-align: 1px; }
 h1 {
   font-family: var(--display); font-weight: 800;
   font-size: clamp(64px, 15vw, 168px); line-height: .82; margin: 0;
@@ -114,13 +125,21 @@ h1 span { color: var(--car); }
   clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
 }
 .go:hover { filter: brightness(1.1); }
-.hint { margin: 0; font-size: 14px; color: var(--muted); padding: 0 4px; }
-.hint b { color: var(--red); font-weight: 600; }
-.hint em { color: var(--green); font-style: normal; font-weight: 600; }
-.hint kbd { font-family: var(--mono); font-size: 12px; color: var(--ink); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; }
+.hint { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; font-size: 13px; color: var(--muted); padding: 2px 4px; }
+.hint span { display: inline-flex; align-items: center; gap: 6px; }
+.hint kbd { font-family: var(--mono); font-size: 11px; color: var(--ink); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; }
+.hint .sw { display: inline-block; width: 12px; height: 12px; border-radius: 2px; }
+.hint .sw.bad { background: var(--red); }
+.hint .sw.good { background: var(--green); }
+.hint .touch { display: none; }
+@media (hover: none) and (pointer: coarse) {
+  .hint .kb { display: none; }
+  .hint .touch { display: inline-flex; }
+}
 
 /* timing tower */
-.label { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; color: var(--muted); margin: 0 0 12px; }
+.label { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 4vw, 40px); line-height: 1; text-transform: uppercase; color: var(--ink); margin: 0 0 16px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
+.label span { font-family: var(--mono); font-weight: 500; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .tower { display: flex; flex-direction: column; gap: 4px; }
 .row { display: grid; grid-template-columns: 44px 190px minmax(0, 1fr) auto; align-items: center; gap: 14px; background: var(--panel); border-left: 4px solid var(--line); padding: 12px 16px 12px 0; }
 .row.now { border-left-color: var(--car); }
@@ -133,9 +152,10 @@ h1 span { color: var(--car); }
 .stint { background: var(--panel); }
 summary.row { cursor: pointer; list-style: none; }
 summary.row::-webkit-details-marker { display: none; }
+summary.row:hover { background: #1b1f27; }
 summary.row:hover .team { color: var(--car); }
-.row .yr::after { content: "  +"; color: var(--car); font-weight: 700; }
-.stint[open] .row .yr::after { content: "  −"; }
+.row .yr::after { content: "+"; display: inline-block; width: 1.4em; margin-left: 10px; text-align: center; color: var(--car); font-size: 16px; font-weight: 700; }
+.stint[open] .row .yr::after { content: "−"; }
 .more { margin: 0; padding: 2px 20px 16px 76px; border-left: 4px solid var(--line); display: flex; flex-direction: column; gap: 6px; font-size: 15px; max-width: 88ch; }
 .stint.now .more { border-left-color: var(--car); }
 .more li::marker { color: var(--car); }
@@ -155,6 +175,9 @@ summary.row:hover .team { color: var(--car); }
 
 footer { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: -24px; }
 
+@media (max-width: 800px) {
+  .intro { grid-template-columns: minmax(0, 1fr); align-items: start; }
+}
 @media (max-width: 700px) {
   #g { height: 420px; }
   .pedal { width: 72px; height: 72px; font-size: 16px; }
@@ -181,9 +204,14 @@ footer { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-
   </header>
 
   <section class="intro">
-    <h1>Gurvir<br><span>Dhillon</span></h1>
-    <div class="stripe" aria-hidden="true"></div>
-    <p class="tag">Software engineer. I ship across the stack, from backend services to infrastructure to the product on top, and I enjoy making things faster.</p>
+    <div class="name">
+      <h1>Gurvir<br><span>Dhillon</span></h1>
+      <div class="stripe" aria-hidden="true"></div>
+    </div>
+    <div class="aside">
+      <p class="tag">Software engineer. I ship across the stack, from backend services to infrastructure to the product on top, and I enjoy making things faster.</p>
+      <p class="status"><span class="ndot" aria-hidden="true"></span>Now: Backend Software Engineer at IBM</p>
+    </div>
   </section>
 
   <section class="rig" aria-label="Hot lap game">
@@ -203,11 +231,18 @@ footer { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-
         <button class="go" id="start" type="button">Lights out ▶</button>
       </div>
     </div>
-    <p class="hint">Steer <kbd>←</kbd> <kbd>→</kbd> · brake <kbd>↓</kbd> or <kbd>Space</kbd>. On a phone, hold either side to steer and the red pedal to brake. Too fast in a corner and you'll slide wide. Avoid <b>bug barriers</b>, drive through <em>green gates</em>.</p>
+    <div class="hint">
+      <span class="kb"><kbd>←</kbd><kbd>→</kbd> steer</span>
+      <span class="kb"><kbd>↓</kbd><kbd>Space</kbd> brake</span>
+      <span class="touch">Phone: hold a side to steer, red pedal to brake</span>
+      <span><i class="sw bad"></i>avoid bugs</span>
+      <span><i class="sw good"></i>drive through wins</span>
+      <span>brake for corners or slide wide</span>
+    </div>
   </section>
 
   <section>
-    <p class="label">TIMING TOWER · SELECT A ROLE FOR DETAILS</p>
+    <h2 class="label">Timing tower <span>Select a role for details</span></h2>
     <div class="tower">
       <details class="stint now">
         <summary class="row now"><span class="pos">1</span><span class="team">IBM</span><span class="role">Backend Software Engineer</span><span class="yr">2025 – NOW</span></summary>
@@ -239,7 +274,7 @@ footer { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-
   </section>
 
   <section id="radio">
-    <p class="label">TEAM RADIO</p>
+    <h2 class="label">Team radio</h2>
     <div class="radio">
       <div class="wave" aria-hidden="true"><i style="height:40%"></i><i style="height:90%;animation-delay:-.2s"></i><i style="height:60%;animation-delay:-.5s"></i><i style="height:100%;animation-delay:-.1s"></i><i style="height:50%;animation-delay:-.7s"></i><i style="height:75%;animation-delay:-.3s"></i></div>
       <div class="msg">
